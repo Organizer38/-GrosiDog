@@ -1,4 +1,3 @@
-[README(1).md](https://github.com/user-attachments/files/28986997/README.1.md)
 # 🐾 GrosiDog — Каталог собак питомника
 
 > Учебный проект на Vue 3 + Vuex 4 без сборщика(CDN).  
