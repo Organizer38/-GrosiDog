@@ -1,0 +1,583 @@
+/* СБРОС И БАЗОВЫЕ СТИЛИ */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+:root {
+  /* Основные цвета */
+  --bg: #eef1f7;
+  --card: #ffffff;
+  --text: #1a2a4a;
+  --muted: #6b7a9b;
+  --border: #dde3ef;
+  --accent: #f5a623;
+  --accent-h: #e0901a;
+  /* Цвета шапки */
+  --header-1: #0d1f3c;
+  --header-2: #1a3a72;
+  /* Цвета по породам */
+  --c-shepherd: #a07830;
+  --c-corgi: #c95c1a;
+  --c-spitz: #7c3aed;
+  --c-jack: #0b7a6b;
+  /* Тени */
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  --shadow-h: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --radius: 16px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#app { 
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; 
+}
+/* ШАПКА */
+.header {
+  background: linear-gradient(135deg, var(--header-1) 0%, var(--header-2) 100%);
+  color: #fff;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header__paws {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7rem;
+  opacity: 0.04;
+  pointer-events: none;
+  letter-spacing: 1rem;
+}
+.header__inner { 
+  position: relative; 
+}
+.header__logo {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+.header__logo span { 
+  color: var(--accent); 
+}
+.header__tagline {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  letter-spacing: 0.3px;
+}
+/* ОСНОВНОЙ КОНТЕНТ */
+.main {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  flex: 1;
+}
+/* СТАТИСТИКА */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+.stat-badge {
+  background: var(--card);
+  border-radius: 50px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 2px solid transparent;
+  user-select: none;
+}
+.stat-badge__count {
+  background: var(--bg);
+  border-radius: 50px;
+  padding: 0.1rem 0.55rem;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--text);
+}
+.stat-badge--shepherd { 
+  border-color: var(--c-shepherd); 
+}
+.stat-badge--corgi    { 
+  border-color: var(--c-corgi);    
+}
+.stat-badge--spitz    { 
+  border-color: var(--c-spitz);    
+}
+.stat-badge--jack     { 
+  border-color: var(--c-jack);     
+}
+/* ФИЛЬТР */
+.filter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter__btn {
+  padding: 0.55rem 1.3rem;
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter__btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+.filter__btn--active {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+.filter__count {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* СЕТКА КАРТОЧЕК */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  gap: 1.5rem;
+}
+/* КАРТОЧКА СОБАКИ */
+.dog-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.dog-card:hover, .dog-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-h);
+  outline: none;
+}
+/* Изображение */
+.dog-card__image-wrap {
+  position: relative;
+  height: 230px;
+  flex-shrink: 0;
+}
+.dog-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+/* Цвета заглушки по породам */
+.dog-card--shepherd .dog-card__placeholder { 
+  background: linear-gradient(135deg, #a07830, #c9a060); 
+}
+.dog-card--corgi    .dog-card__placeholder { 
+  background: linear-gradient(135deg, #c95c1a, #e8854e); 
+}
+.dog-card--spitz    .dog-card__placeholder { 
+  background: linear-gradient(135deg, #7c3aed, #a855f7); 
+}
+.dog-card--jack     .dog-card__placeholder { 
+  background: linear-gradient(135deg, #0b7a6b, #14a89a); 
+}
+.dog-card__placeholder-icon {
+  font-size  : 3.5rem;
+  line-height: 1;
+}
+.dog-card__placeholder-hint {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.dog-card__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dog-card__badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+/* Тело карточки */
+.dog-card__body {
+  padding: 1.2rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+}
+.dog-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.dog-card__name {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.dog-card__gender {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.dog-card__gender--male   { 
+  color: #3b82f6; 
+}
+.dog-card__gender--female { 
+  color: #ec4899; 
+}
+.dog-card__breed {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.dog-card--shepherd .dog-card__breed { 
+  color: var(--c-shepherd); 
+}
+.dog-card--corgi    .dog-card__breed { 
+  color: var(--c-corgi);    
+}
+.dog-card--spitz    .dog-card__breed { 
+  color: var(--c-spitz);    
+}
+.dog-card--jack     .dog-card__breed { 
+  color: var(--c-jack);     
+}
+.dog-card__meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.dog-card__desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+.dog-card__btn {
+  margin-top: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.dog-card__btn:hover { 
+  background: var(--border); 
+}
+/* ПУСТОЙ СПИСОК */
+.empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--muted);
+}
+.empty__icon {
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+/* ПОДВАЛ */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+/* МОДАЛЬНОЕ ОКНО */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 18, 40, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  width: min(680px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 540px) {
+  .modal {
+     flex-direction: row; 
+     max-height: 85vh; 
+    }
+}
+.modal__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.modal__close:hover { 
+  background: rgba(0,0,0,0.4); 
+}
+/* Фото в модалке */
+.modal__image-wrap {
+  position: relative;
+  min-height: 220px;
+  flex-shrink: 0;
+}
+@media (min-width: 540px) {
+  .modal__image-wrap { 
+    width: 260px; 
+  }
+}
+.modal__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal--shepherd .modal__placeholder { 
+  background: linear-gradient(180deg, #a07830, #c9a060); 
+}
+.modal--corgi    .modal__placeholder { 
+  background: linear-gradient(180deg, #c95c1a, #e8854e); 
+}
+.modal--spitz    .modal__placeholder { 
+  background: linear-gradient(180deg, #7c3aed, #a855f7); 
+}
+.modal--jack     .modal__placeholder { 
+  background: linear-gradient(180deg, #0b7a6b, #14a89a); 
+}
+.modal__placeholder-icon { 
+  font-size: 4.5rem; 
+}
+.modal__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.modal__badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+/* Текстовый блок модалки */
+.modal__body {
+  padding: 1.75rem 1.75rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal__name {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.modal__gender {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+.modal__breed {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.modal--shepherd .modal__breed { 
+  color: var(--c-shepherd); 
+}
+.modal--corgi    .modal__breed { 
+  color: var(--c-corgi);    
+}
+.modal--spitz    .modal__breed { 
+  color: var(--c-spitz);    
+}
+.modal--jack     .modal__breed { 
+  color: var(--c-jack);     
+}
+.modal__meta {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1rem;
+  margin: 0.25rem 0;
+}
+.modal__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.modal__meta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+.modal__meta-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.modal__status--yes { 
+  color: #16a34a; 
+}
+.modal__status--no  { 
+  color: var(--muted); 
+}
+.modal__desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+.modal__contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.modal__contact-btn:hover { 
+  background: var(--accent-h); 
+}
+/* АНИМАЦИИ */
+/* Модалка */
+.modal-fade-enter-active, .modal-fade-leave-active { 
+  transition: opacity 0.25s ease; 
+}
+.modal-fade-enter-active .modal, .modal-fade-leave-active .modal { 
+  transition: transform 0.25s ease; 
+}
+.modal-fade-enter-from, .modal-fade-leave-to { 
+  opacity: 0; 
+}
+.modal-fade-enter-from .modal, .modal-fade-leave-to  .modal { 
+  transform: scale(0.92) translateY(16px); 
+}
+/* Карточки */
+.card-list-enter-active { 
+  transition: all 0.3s ease; 
+}
+.card-list-leave-active { 
+  transition: all 0.2s ease; 
+}
+.card-list-enter-from, .card-list-leave-to  { 
+  opacity: 0; 
+  transform: translateY(12px); 
+}
+.card-list-move         { 
+  transition: transform 0.3s ease; 
+}
+/* АДАПТИВНОСТЬ */
+@media (max-width: 600px) {
+  .header__logo { font-size: 2rem; }
+  .header       { padding: 1.75rem 1rem 1.5rem; }
+  .main         { padding: 1.25rem 1rem; }
+  .grid         { grid-template-columns: 1fr; }
+  .modal__body  { padding: 1.25rem 1.25rem 1.5rem; }
+  .modal__meta  { grid-template-columns: 1fr; }
+}
+
